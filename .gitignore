@@ -5,3 +5,8 @@ yarn.lock
 *.sublime-project
 *.sublime-workspace
 .astro
+
+# Astro build output (generated at repo root — built by CI/GitHub Actions)
+/_astro/
+/*.html
+/*.xml
