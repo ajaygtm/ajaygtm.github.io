@@ -9,31 +9,31 @@ title: Contact
 const originalSearchParams = new URLSearchParams(location.search);
 const element = document.querySelector('#contact-email');
 
-const url = new URL(element.href);
+const emailUrl = new URL(element.href);
 if (originalSearchParams.has('subject')) {
-	url.searchParams.set('subject', originalSearchParams.get('subject'));
+	emailUrl.searchParams.set('subject', originalSearchParams.get('subject'));
 }
 if (originalSearchParams.has('body')) {
-	url.searchParams.set('body', originalSearchParams.get('body'));
+	emailUrl.searchParams.set('body', originalSearchParams.get('body'));
 }
 
-element.href = url.toString();
+element.href = emailUrl.toString();
 
 // Clear URL parameters.
-const url = new URL(window.location);
-url.searchParams.delete('subject');
-url.searchParams.delete('body');
-window.history.replaceState({}, '', url);
+const currentUrl = new URL(window.location);
+currentUrl.searchParams.delete('subject');
+currentUrl.searchParams.delete('body');
+window.history.replaceState({}, '', currentUrl);
 </script>
 
 # Contact
 
 <div class="sm:-mt-2 not-prose font-bold bg-clip-text text-transparent bg-linear-to-r from-primary-500 to-secondary-500 hover:underline hover:underline-offset-8 hover:decoration-4 decoration-black dark:decoration-white">
-	<a id="contact-email" href="mailto:sindresorhus@gmail.com" class="text-[clamp(0.5rem,6vw,1.875rem)]">sindresorhus@gmail.com</a>
+	<a id="contact-email" href="mailto:ajaygautam3001@gmail.com" class="text-[clamp(0.5rem,6vw,1.875rem)]">ajaygautam3001@gmail.com</a>
 </div>
 
-I value my time, so make it worth it, and [keep it succinct](https://www.google.com/search?q=succinct+emails).
+I value clear messages, so keep it concise and include enough context for me to help.
 
-I don't do calls. And no job offers.
+I prefer email over calls.
 
-For app-related queries, use the in-app feedback button or the support link on the app's page.
+If you're reaching out about projects, collaboration, or ML work, include the goal, constraints, and timeline.

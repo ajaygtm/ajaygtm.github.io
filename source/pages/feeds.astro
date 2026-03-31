@@ -1,31 +1,5 @@
 ---
-import MarkdownIt from 'markdown-it';
 import MarkdownLayout from '~/layouts/MarkdownLayout.astro';
-import {fetchApps} from '~/utils/apps.js';
-
-const parser = new MarkdownIt({
-	html: true,
-	linkify: true,
-	typographer: true,
-});
-
-const staticContent = `
-# RSS Feeds
-
-#### General
-
-- [Blog](/rss.xml)
-- [New Apps](/rss-apps.xml)
-- [New Repos](/rss-repos.xml)
-
-#### App Release Notes
-`;
-
-const apps = await fetchApps({includeUnlisted: true});
-
-const appsWithReleases = apps
-	.filter(app => app.releasesRepo)
-	.sort((a, b) => a.title.localeCompare(b.title));
 
 const frontmatter = {
 	title: 'RSS Feeds',
@@ -33,10 +7,10 @@ const frontmatter = {
 ---
 
 <MarkdownLayout frontmatter={frontmatter}>
-	<div set:html={parser.render(staticContent)}/>
+	<h1>RSS Feeds</h1>
 	<ul>
-		{appsWithReleases.map(app => (
-			<li><a href={`/${app.slug}/rss.xml`}>{app.title}</a></li>
-		))}
+		<li><a href="/rss.xml">Site updates</a></li>
+		<li><a href="/rss-repos.xml">GitHub repositories</a></li>
 	</ul>
+	<p>App-specific and cloned feed endpoints were removed as part of the site cleanup.</p>
 </MarkdownLayout>
