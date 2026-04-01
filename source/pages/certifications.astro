@@ -34,20 +34,20 @@ function status(cert) {
 	return expDate >= new Date(now.getFullYear(), now.getMonth(), 1) ? 'Active' : 'Expired';
 }
 
-function statusColor(label) {
-	switch (label) {
-		case 'Active': {
-			return 'text-emerald-600 dark:text-emerald-400';
-		}
-
-		case 'Expired': {
-			return 'text-red-600 dark:text-red-400';
-		}
-
-		default: {
-			return 'text-gray-500 dark:text-gray-400';
-		}
+function statusIndicator(st) {
+	if (st === 'Expired') {
+		return {
+			outerClass: 'border-gray-300/80 dark:border-gray-600/70 bg-gray-50/80 dark:bg-gray-800/70',
+			innerClass: 'bg-gray-400 dark:bg-gray-500',
+			label: 'Expired certification',
+		};
 	}
+
+	return {
+		outerClass: 'border-emerald-400/70 dark:border-emerald-500/70 bg-emerald-50/70 dark:bg-emerald-900/20',
+		innerClass: 'bg-emerald-500 dark:bg-emerald-400',
+		label: st === 'Active' ? 'Active certification' : 'Certification with no expiry',
+	};
 }
 ---
 
@@ -58,6 +58,7 @@ function statusColor(label) {
 		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			{certifications.map(cert => {
 				const st = status(cert);
+				const indicator = statusIndicator(st);
 				return (
 					<article class="group rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-5 flex flex-col h-full shadow-xs hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 hover:border-primary-500/70 focus-within:border-primary-500/70">
 						<div class="flex items-start gap-3 mb-3">
@@ -87,19 +88,9 @@ function statusColor(label) {
 								</p>
 							</div>
 							<div class="flex-shrink-0 mt-0.5">
-								{st === 'Active' ? (
-									<span class="inline-flex h-4 w-4 items-center justify-center rounded-full border border-emerald-400/70 dark:border-emerald-500/70 bg-emerald-50/70 dark:bg-emerald-900/20" aria-label="Active certification">
-										<span class="h-1.5 w-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400"/>
-									</span>
-								) : st === 'Expired' ? (
-									<span class="inline-flex h-4 w-4 items-center justify-center rounded-full border border-gray-300/80 dark:border-gray-600/70 bg-gray-50/80 dark:bg-gray-800/70" aria-label="Expired certification">
-										<span class="h-1.5 w-1.5 rounded-full bg-gray-400 dark:bg-gray-500"/>
-									</span>
-								) : (
-									<span class="inline-flex h-4 w-4 items-center justify-center rounded-full border border-emerald-400/70 dark:border-emerald-500/70 bg-emerald-50/70 dark:bg-emerald-900/20" aria-label="Certification with no expiry">
-										<span class="h-1.5 w-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400"/>
-									</span>
-								)}
+								<span class={`inline-flex h-4 w-4 items-center justify-center rounded-full border ${indicator.outerClass}`} aria-label={indicator.label}>
+									<span class={`h-1.5 w-1.5 rounded-full ${indicator.innerClass}`}/>
+								</span>
 							</div>
 						</div>
 
@@ -153,6 +144,7 @@ function statusColor(label) {
 								</a>
 							)}
 						</div>
+					</div>
 					</article>
 				);
 			})}
