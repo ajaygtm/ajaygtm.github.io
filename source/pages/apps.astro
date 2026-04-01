@@ -1,18 +1,90 @@
 ---
+import {Icon} from 'astro-iconify';
 import {SITE} from '~/config.mjs';
 import Layout from '~/layouts/PageLayout.astro';
 
 const meta = {
 	title: `Apps — ${SITE.name}`,
-	description: 'This site now focuses on Ajay Gautam\'s projects, experience, and professional work.',
+	description: 'A curated list of apps built by Ajay Gautam',
 };
+
+const apps = [
+	{
+		title: 'Project Atlas',
+		summary: 'A location intelligence dashboard for comparing regional trends and growth signals.',
+		stack: ['Python', 'Pandas', 'Plotly'],
+		icon: 'tabler:map-2',
+		href: '#',
+	},
+	{
+		title: 'Signal Forge',
+		summary: 'An experimentation workspace to test lightweight ML models and evaluate feature impact.',
+		stack: ['Scikit-learn', 'SQL', 'FastAPI'],
+		icon: 'tabler:wave-sine',
+		href: '#',
+	},
+	{
+		title: 'Insight Relay',
+		summary: 'A reporting pipeline that turns weekly metrics into concise, shareable team snapshots.',
+		stack: ['Node.js', 'Astro', 'APIs'],
+		icon: '',
+		href: '#',
+	},
+];
 ---
 
 <Layout {meta}>
-	<section class="max-w-4xl mx-auto px-6 py-16 md:py-24">
-		<h1 class="text-4xl md:text-6xl font-bold leading-tighter tracking-tighter mb-6 font-heading">Apps</h1>
-		<p class="text-lg md:text-xl text-gray-700 dark:text-slate-300 mb-6">The cloned app catalog was removed during the portfolio cleanup.</p>
-		<p class="text-lg md:text-xl text-gray-700 dark:text-slate-300 mb-10">This site now focuses on Ajay Gautam's projects, certifications, and experience. Use the projects page for current work.</p>
-		<a href="/projects" class="inline-flex items-center rounded-2xl bg-primary-600 px-6 py-3 text-white hover:bg-primary-700">View projects</a>
+	<section class="mx-auto max-w-6xl px-4 py-12 md:py-16">
+		<div class="mb-10 md:mb-14 text-center">
+			<h1 class="text-4xl md:text-5xl font-bold font-heading leading-tight tracking-tight">Apps</h1>
+			<p class="mt-4 text-base md:text-lg text-gray-600 dark:text-gray-300">A few things I built and continue to refine.</p>
+		</div>
+
+		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+			{apps.map((app, index) => (
+				<article
+					class="group rounded-3xl border border-gray-200/90 dark:border-slate-700/80 bg-white dark:bg-slate-900 p-6 shadow-sm hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gray-300/60 dark:hover:shadow-black/40 transition-all duration-300 opacity-0 app-reveal"
+					style={`animation-delay: ${index * 90}ms`}
+				>
+					<div class="mb-4 h-11 w-11 rounded-2xl bg-primary-100 text-primary-700 dark:bg-primary-900/40 dark:text-primary-300 flex items-center justify-center text-lg font-bold">
+						{app.icon ? (
+							<Icon name={app.icon} class="h-5 w-5"/>
+						) : (
+							app.title.charAt(0)
+						)}
+					</div>
+
+					<h2 class="text-xl font-semibold mb-2 group-hover:text-primary-600 transition-colors">{app.title}</h2>
+					<p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4">{app.summary}</p>
+
+					<div class="flex flex-wrap gap-2 mb-5">
+						{app.stack.map(tag => (
+							<span class="text-[11px] font-medium rounded-md px-2 py-1 bg-gray-100 text-gray-700 dark:bg-slate-800 dark:text-slate-300">{tag}</span>
+						))}
+					</div>
+
+					<a href={app.href} class="inline-flex items-center text-sm font-medium text-primary-700 dark:text-primary-300 hover:underline underline-offset-4">
+						Open preview
+					</a>
+				</article>
+			))}
+		</div>
 	</section>
 </Layout>
+
+<style>
+@keyframes appReveal {
+	from {
+		opacity: 0;
+		transform: translateY(12px) scale(0.985);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+.app-reveal {
+	animation: appReveal 480ms cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+</style>
