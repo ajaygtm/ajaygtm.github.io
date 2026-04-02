@@ -10,25 +10,25 @@ const meta = {
 
 const apps = [
 	{
-		title: 'Project Atlas',
-		summary: 'A location intelligence dashboard for comparing regional trends and growth signals.',
-		stack: ['Python', 'Pandas', 'Plotly'],
-		icon: 'tabler:map-2',
-		href: '#',
+		title: 'CleanCalc',
+		summary: 'Everyday math, beautifully simple.',
+		stack: ['Firefox Extension', 'Everyday Math'],
+		icon: 'tabler:calculator',
+		href: 'https://github.com/ajaygtm/cleancalc',
 	},
 	{
-		title: 'Signal Forge',
-		summary: 'An experimentation workspace to test lightweight ML models and evaluate feature impact.',
-		stack: ['Scikit-learn', 'SQL', 'FastAPI'],
-		icon: 'tabler:wave-sine',
-		href: '#',
+		title: 'TipOffSchedule',
+		summary: 'NBA dates, scores, no fuss.',
+		stack: ['Website', 'NBA Schedules'],
+		icon: 'tabler:calendar-event',
+		href: 'https://tipoffschedule.com',
 	},
 	{
-		title: 'Insight Relay',
-		summary: 'A reporting pipeline that turns weekly metrics into concise, shareable team snapshots.',
-		stack: ['Node.js', 'Astro', 'APIs'],
-		icon: '',
-		href: '#',
+		title: 'Fresh Start',
+		summary: 'Open tab, feel lighter.',
+		stack: ['Firefox Extension', 'New Tab'],
+		icon: 'tabler:leaf',
+		href: 'https://github.com/ajaygtm/FreshStart',
 	},
 ];
 ---
@@ -63,8 +63,8 @@ const apps = [
 						))}
 					</div>
 
-					<a href={app.href} class="inline-flex items-center text-sm font-medium text-primary-700 dark:text-primary-300 hover:underline underline-offset-4">
-						Open preview
+					<a href={app.href} target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-medium text-primary-700 dark:text-primary-300 hover:underline underline-offset-4">
+						View project
 					</a>
 				</article>
 			))}
